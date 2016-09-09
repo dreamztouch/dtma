@@ -20,46 +20,53 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                	{!! Form::open() !!}
+
+                                    <div class="alert alert-info">
+                                        * Sign means mendatory field
+                                    </div>
+                                	{!! Form::open(['route' => 'bloodbank.store']) !!}
 
                                 		<div class="form-group">
-                                            {{ Form::label("oraganization name","Organization's Name: ") }}
-                                            {{ Form::text("organizationName", null, ["class" => "form-control", "placeholder" => "Enter text"]) }}
+                                            {{ Form::label("oraganization name","Bloodbanks's Name ") }}<strong class="text-danger">*</strong>
+                                            {{ Form::text("bloodbank_name", null, ["class" => "form-control", "placeholder" => "Enter text"]) }}
                                         </div>
                                         <div class="form-group">
-                                        	{{ Form::label("address","address: ") }}
-                                        	{{ Form::textarea('address', null, ['class' => 'form-control', 'size' => '30x3']) }}
+                                        	{{ Form::label("address","Address ") }}<strong class="text-danger">*</strong>
+                                        	{{ Form::textarea('location', null, ['class' => 'form-control', 'size' => '30x3']) }}
                                         </div>
                                         <div class="form-group">
-                                        	{{ Form::label("Area Name","Enter Area Name: ") }}
-                                        	{{ Form::text("areaName", null, ["class" => "form-control", "placeholder" => "Enter text"]) }}
+                                        	{{ Form::label("Area Name","Enter Area Name ") }}<strong class="text-danger">*</strong>
+                                        	{{ Form::text("area", null, ["class" => "form-control", "placeholder" => "Enter text"]) }}
                                         </div>
                                         <div class="form-group">
-                                        	{{ Form::label("City Name","Select City: ") }}
+                                        	{{ Form::label("City Name","Select City ") }}
                                             
                                             {{ Form::select('city', [
-											   'DHK' => 'Dhaka',
-											   'CTG' => 'Chittagong',
-											   'KHU' => 'Khulna',
-											   'SHY' => 'Shylet',
-											   'BAR' => 'Barisal'], null, ['class' => 'form-control']
+											   'Dhaka' => 'Dhaka',
+											   'Chittagong' => 'Chittagong',
+											   'Khulna' => 'Khulna',
+											   'Shylet' => 'Shylet',
+											   'Barisal' => 'Barisal'], null, ['class' => 'form-control']
 											) }}
                                         </div>
                                         <div class="form-group">
-                                        	{{ Form::label("Contact Number","Contact Number: ") }}
-                                        	{{ Form::text("contactNumber", null, ["class" => "form-control", "placeholder" => "Enter Number"]) }}
+                                        	{{ Form::label("Contact Number","Contact Number ") }}
+                                        	{{ Form::text("contact", null, ["class" => "form-control", "placeholder" => "Enter Number"]) }}
                                         </div>
                                         <div class="form-group">
-                                        	{{ Form::label("Email","Email: ") }}
-                                            {{ Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Enter E-mail']) }}
+                                        	{{ Form::label("Email","Email ") }}
+                                            {{ Form::email('bloodbank_email', null, ['class' => 'form-control', 'placeholder' => 'Enter E-mail']) }}
                                         </div>
                                         <div class="form-group">
-                                        	{{ Form::label("Website","Website: ") }}
-                                            {{ Form::text("website", null, ["class" => "form-control", "placeholder" => "Enter Website"]) }}
+                                        	{{ Form::label("Website","Website ") }}
+                                            {{ Form::text("bloodbank_website", null, ["class" => "form-control", "placeholder" => "Enter Website"]) }}
                                         </div>
                                         {{ Form::submit('ADD Blood Bank', ['class' => 'btn btn-primary']) }}
 
                                 	{!! Form::close() !!}
+                                </div>
+                                <div class="col-lg-6">
+                                    @include('common.error')
                                 </div>
                             </div>
                             <!-- /.row (nested) -->

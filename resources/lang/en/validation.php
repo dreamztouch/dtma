@@ -94,9 +94,23 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'bloodbank_name' => [
+            'required' => 'Blood bank name is required',
+            'max'      => 'Blood bank name may not be greater than :max characters',
+            'regex'    => 'Invalid blood bank name'
         ],
+        'location'       => [
+            'required' => 'Blood bank location is required',
+            'max'      => 'Blood bank location may not be greater than :max characters'
+        ],
+        'area'           => [
+            'required' => 'Blood bank area is required',
+            'max'      => 'Blood bank area may not be greater than :max characters',
+            'regex'    => 'Invalid  area name'
+        ],
+        'bloodbank_website' =>[
+            'regex'    => 'Invalid website address' 
+        ]
     ],
 
     /*

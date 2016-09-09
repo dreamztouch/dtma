@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Bloodbank;
+
+use Session;
+
 class BloodbankController extends Controller
 {
     /**
@@ -36,7 +40,39 @@ class BloodbankController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate Data
+        $this->validate($request, [
+            'bloodbank_name' => [
+                'required',
+                'max: 255',
+                'regex: /^[a-zA-Z .\-]+$/'
+            ],
+            'location' => 'required | max:255',
+            'area' => [
+                'required',
+                'max:255',
+                'regex: /^[a-zA-Z .\-]+$/'
+            ],
+            'bloodbank_email' => 'email',
+            'bloodbank_website' => [
+                'regex: /^(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,4}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&amp;?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?$/'
+            ]        
+        ]);
+
+        $bloodbank = new Bloodbank;
+        $bloodbank->bloodbank_name = $request->bloodbank_name;
+        $bloodbank->location = $request->location;
+        $bloodbank->area = $request->area;
+        $bloodbank->city = $request->city;
+        $bloodbank->contact = $request->contact;
+        $bloodbank->bloodbank_email = $request->bloodbank_email;
+        $bloodbank->bloodbank_web = $request->bloodbank_website;
+
+        $bloodbank->save();
+
+        Session::flash('success', 'Blood Bank Information Saved Successfully');
+        return redirect()->route('bloodbank.show', $bloodbank->id);
+
     }
 
     /**
@@ -47,7 +83,8 @@ class BloodbankController extends Controller
      */
     public function show($id)
     {
-        //
+        $bloodbank = Bloodbank::find($id);
+        return view('bloodbank.show')->withBloodbank($bloodbank);
     }
 
     /**

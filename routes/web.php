@@ -22,7 +22,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('admin/register', 'Auth\RegisterController@register');
 
 	Route::resource('doctors', 'DoctorController');
-	Route::resource('admin/bloodbanks', 'BloodbankController');
+	Route::resource('admin/bloodbank', 'BloodbankController');
 });
 
 
