@@ -19,7 +19,8 @@ class BloodbankController extends Controller
      */
     public function index()
     {
-        //
+        $bloodbanks = Bloodbank::all();
+        return view('bloodbank.index')->withBloodbanks($bloodbanks);
     }
 
     /**
@@ -95,7 +96,8 @@ class BloodbankController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bloodbank = Bloodbank::find($id);
+        return view('bloodbank.edit')->withBloodbank($bloodbank);
     }
 
     /**
@@ -119,5 +121,10 @@ class BloodbankController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function BloodbankEdit(){
+        $bloodbanks = Bloodbank::all();
+        return view('bloodbank.editall')->withBloodbanks($bloodbanks);
     }
 }

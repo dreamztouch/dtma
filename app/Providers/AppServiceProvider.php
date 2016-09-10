@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Bloodbank;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,6 +16,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $totalBloodbank = Bloodbank::count();
+        view()->share('totalBloodbank', $totalBloodbank);
     }
 
     /**

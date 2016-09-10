@@ -21,10 +21,12 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('admin/register', 'Auth\RegisterController@showRegistrationForm');
 	Route::post('admin/register', 'Auth\RegisterController@register');
 
-	Route::resource('doctors', 'DoctorController');
+	Route::get('admin/bloodbank/edit', ['as' => 'bloodbank.editall', 'uses' => 'BloodbankController@BloodbankEdit']);
 	Route::resource('admin/bloodbank', 'BloodbankController');
+	Route::resource('doctors', 'DoctorController');
 });
 
 
 Route::get('admin/dashboard', 'DtmaController@getAdminDashboard');
+
 
