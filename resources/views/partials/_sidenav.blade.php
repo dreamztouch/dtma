@@ -37,14 +37,14 @@
                             <a href="#"><i class="fa fa-h-square"></i> Hospitals<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="add_hospital.html"><i class="fa fa-plus"></i> Add Hospital</a>
+                                    <a href="{{ route('hospital.create') }}"><i class="fa fa-plus"></i> Add Hospital</a>
                                 </li>
                                 <li>
-                                    <a href="edit_hospital.html"><i class="fa fa-pencil-square-o"></i> Edit Hospital</a>
+                                    <a href="{{ route('hospital.editall') }}"><i class="fa fa-pencil-square-o"></i> Edit Hospital</a>
                                 </li>
 
                                 <li>
-                                    <a href="delete_hospital.html"><i class="fa fa-remove"></i> Delete Hospital</a>
+                                    <a href="{{ route('hospital.deleteall') }}"><i class="fa fa-remove"></i> Delete Hospital</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -54,14 +54,14 @@
                             <a href="#"><i class="fa fa-ambulance"></i> Ambulance<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="add_ambulance.html"><i class="fa fa-plus"></i> Add Ambulance</a>
+                                    <a href="{{ route('ambulance.create') }}"><i class="fa fa-plus"></i> Add Ambulance</a>
                                 </li>
                                 <li>
-                                    <a href="edit_ambulance.html"><i class="fa fa-pencil-square-o"></i> Edit Ambulance</a>
+                                    <a href="{{ route('ambulance.editall') }}"><i class="fa fa-pencil-square-o"></i> Edit Ambulance</a>
                                 </li>
 
                                 <li>
-                                    <a href="delete_ambulance.html"><i class="fa fa-remove"></i> Delete Ambulance</a>
+                                    <a href="{{ route('ambulance.deleteall') }}"><i class="fa fa-remove"></i> Delete Ambulance</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -71,14 +71,14 @@
                             <a href="#"><i class="fa fa-medkit"></i> Blood Bank<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="add_bloodbank.html"><i class="fa fa-plus"></i> Add Blood Bank</a>
+                                    <a href="{{ route('bloodbank.create') }}"><i class="fa fa-plus"></i> Add Blood Bank</a>
                                 </li>
                                 <li>
-                                    <a href="edit_bloodbank.html"><i class="fa fa-pencil-square-o"></i> Edit Blood Bank</a>
+                                    <a href="{{ route('bloodbank.editall') }}"><i class="fa fa-pencil-square-o"></i> Edit Blood Bank</a>
                                 </li>
 
                                 <li>
-                                    <a href="delete_bloodbank.html"><i class="fa fa-remove"></i> Delete Blood Bank</a>
+                                    <a href="{{ route('bloodbank.deleteall') }}"><i class="fa fa-remove"></i> Delete Blood Bank</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

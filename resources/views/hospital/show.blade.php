@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'DTMA- Blood Bank')
+@section('title', 'DTMA- Hospital')
 
 @section('content')
 
 			<div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">{{ $bloodbank->bloodbank_name }}</h2>
+                    <h2 class="page-header">{{ $hospital->hospital_name }}</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -15,18 +15,18 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Blood Bank Information
+                            Hospital Information
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <p><strong>#ID:</strong> {{ $bloodbank->id }}</p>
-                            <p><strong>Blood Bank Name:</strong> {{ $bloodbank->bloodbank_name }}</p>
-                            <p><strong>Address:</strong> {{ $bloodbank->location }}</p>
-                            <p><strong>Contact:</strong> {{ $bloodbank->contact }}</p>
-                            <p><strong>Area:</strong> {{ $bloodbank->area }}</p>
-                            <p><strong>City:</strong> {{ $bloodbank->city }}</p>
-                            <p><strong>Email:</strong> {{ $bloodbank->bloodbank_email }}</p>
-                            <p><strong>Web:</strong> {{ $bloodbank->bloodbank_web }}</p>
+                            <p><strong>#ID:</strong> {{ $hospital->id }}</p>
+                            <p><strong>Hospital's Name:</strong> {{ $hospital->hospital_name }}</p>
+                            <p><strong>Hospital's Category:</strong> {{ $hospital->category }}</p>
+                            <p><strong>Hopital's Speciality:</strong> {{ $hospital->hos_speciality }}</p>
+                            <p><strong>Address:</strong> {{ $hospital->hos_location }}</p>
+                            <p><strong>Area:</strong> {{ $hospital->area }}</p>
+                            <p><strong>City:</strong> {{ $hospital->city }}</p>
+                            <p><strong>Contact:</strong> {{ $hospital->contact }}</p>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -36,6 +36,7 @@
             </div>
 
 @stop
+
 
 @if (Session::has('success'))
 

@@ -104,12 +104,26 @@ return [
             'max'      => 'Blood bank location may not be greater than :max characters'
         ],
         'area'           => [
-            'required' => 'Blood bank area is required',
-            'max'      => 'Blood bank area may not be greater than :max characters',
+            'required' => 'Area is required',
+            'max'      => 'Area may not be greater than :max characters',
             'regex'    => 'Invalid  area name'
         ],
         'bloodbank_website' =>[
             'regex'    => 'Invalid website address' 
+        ],
+        'organization_name' => [
+            'required' => 'Ambulance organization name is required',
+            'max'      => 'Ambulance organization name may not be greater than :max characters',
+            'regex'    => 'Invalid Ambulance organization name'
+        ],
+        'hospital_name'  => [
+            'required' => 'Hospital name is required',
+            'max'      => 'Hospital name may not be greater than :max characters',
+            'regex'    => 'Invalid hospital name'
+        ],
+        'hos_location'   => [
+            'required' => 'Hospital location is required',
+            'max'      => 'Hospital location may not be greater than :max characters'
         ]
     ],
 

@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'DTMA- Blood Bank')
+@section('title', 'DTMA- Ambulance')
 
 @section('content')
 
 			<div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">{{ $bloodbank->bloodbank_name }}</h2>
+                    <h2 class="page-header">{{ $ambulance->organization_name }}</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -15,18 +15,15 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Blood Bank Information
+                            Ambulance Information
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <p><strong>#ID:</strong> {{ $bloodbank->id }}</p>
-                            <p><strong>Blood Bank Name:</strong> {{ $bloodbank->bloodbank_name }}</p>
-                            <p><strong>Address:</strong> {{ $bloodbank->location }}</p>
-                            <p><strong>Contact:</strong> {{ $bloodbank->contact }}</p>
-                            <p><strong>Area:</strong> {{ $bloodbank->area }}</p>
-                            <p><strong>City:</strong> {{ $bloodbank->city }}</p>
-                            <p><strong>Email:</strong> {{ $bloodbank->bloodbank_email }}</p>
-                            <p><strong>Web:</strong> {{ $bloodbank->bloodbank_web }}</p>
+                            <p><strong>#ID:</strong> {{ $ambulance->id }}</p>
+                            <p><strong>Organization's Name:</strong> {{ $ambulance->organization_name }}</p>
+                            <p><strong>Contact:</strong> {{ $ambulance->contact }}</p>
+                            <p><strong>Area:</strong> {{ $ambulance->area }}</p>
+                            <p><strong>City:</strong> {{ $ambulance->city }}</p>
                         </div>
                         <!-- /.panel-body -->
                     </div>

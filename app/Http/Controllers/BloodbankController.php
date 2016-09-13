@@ -12,6 +12,12 @@ use Session;
 
 class BloodbankController extends Controller
 {
+
+    /*public function __construct(){
+        $this->middleware('auth');
+    }*/
+
+
     /**
      * Display a listing of the resource.
      *
@@ -109,7 +115,40 @@ class BloodbankController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validate Data
+        $this->validate($request, [
+            'bloodbank_name' => [
+                'required',
+                'max: 255',
+                'regex: /^[a-zA-Z .\-]+$/'
+            ],
+            'location' => 'required | max:255',
+            'area' => [
+                'required',
+                'max:255',
+                'regex: /^[a-zA-Z .\-]+$/'
+            ],
+            'bloodbank_email' => 'email',
+            'bloodbank_web' => [
+                'regex: /^(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,4}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&amp;?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?$/'
+            ]        
+        ]);
+
+        // Save data to database
+        $bloodbank = Bloodbank::find($id);
+
+        $bloodbank->bloodbank_name = $request->input('bloodbank_name');
+        $bloodbank->location = $request->input('location');
+        $bloodbank->area = $request->input('area');
+        $bloodbank->city = $request->input('city');
+        $bloodbank->contact = $request->input('contact');
+        $bloodbank->bloodbank_email = $request->input('bloodbank_email');
+        $bloodbank->bloodbank_web = $request->input('bloodbank_web');
+
+        $bloodbank->save();
+
+        Session::flash('success', 'Blood bank inforamtion update successfully');
+        return redirect()->route('bloodbank.show', $bloodbank->id);
     }
 
     /**
@@ -126,5 +165,10 @@ class BloodbankController extends Controller
     public function BloodbankEdit(){
         $bloodbanks = Bloodbank::all();
         return view('bloodbank.editall')->withBloodbanks($bloodbanks);
+    }
+
+    public function BloodbankDelete(){
+        $bloodbanks = Bloodbank::all();
+        return view('bloodbank.deleteall')->withBloodbanks($bloodbanks);
     }
 }

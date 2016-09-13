@@ -37,12 +37,12 @@
                                     <i class="fa fa-h-square fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
+                                    <div class="huge">{{ $data['totalHospital'] }}</div>
                                     <div>Hospitals</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="hospital_details.html">
+                        <a href="{{ route('hospital.index') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -59,12 +59,12 @@
                                     <i class="fa fa-ambulance fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
+                                    <div class="huge">{{ $data['totalAmbulance'] }}</div>
                                     <div>Ambulance</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="ambulance_details.html">
+                        <a href="{{ route('ambulance.index') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -81,12 +81,12 @@
                                     <i class="fa fa-medkit fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{{$totalBloodbank}}</div>
+                                    <div class="huge">{{ $data['totalBloodbank'] }}</div>
                                     <div>Blood Bank</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="bloodbank_details.html">
+                        <a href="{{ route('bloodbank.index') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

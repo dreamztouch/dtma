@@ -21,8 +21,24 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('admin/register', 'Auth\RegisterController@showRegistrationForm');
 	Route::post('admin/register', 'Auth\RegisterController@register');
 
+	
+	// Blood Bank Routes
 	Route::get('admin/bloodbank/edit', ['as' => 'bloodbank.editall', 'uses' => 'BloodbankController@BloodbankEdit']);
+	Route::get('admin/bloodbank/delete', ['as' => 'bloodbank.deleteall', 'uses' => 'BloodbankController@BloodbankDelete']);
 	Route::resource('admin/bloodbank', 'BloodbankController');
+	
+
+	// Ambulance Routes
+	Route::get('admin/ambulance/edit', ['as' => 'ambulance.editall', 'uses' => 'AmbulanceController@AmbulanceEdit']);
+	Route::get('admin/ambulance/delete', ['as' => 'ambulance.deleteall', 'uses' => 'AmbulanceController@AmbulanceDelete']);
+	Route::resource('admin/ambulance', 'AmbulanceController');
+
+	
+	// Hospital Routes
+	Route::get('admin/hospital/edit', ['as' => 'hospital.editall', 'uses' => 'HospitalController@HospitalEdit']);
+	Route::get('admin/hospital/delete', ['as' => 'hospital.deleteall', 'uses' => 'HospitalController@HospitalDelete']);
+	Route::resource('admin/hospital', 'HospitalController');
+
 	Route::resource('doctors', 'DoctorController');
 });
 
