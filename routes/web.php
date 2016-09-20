@@ -23,8 +23,21 @@ Route::group(['middleware' => ['web']], function () {
 
 	
 	// Blood Bank Routes
+
 	Route::get('admin/bloodbank/edit', ['as' => 'bloodbank.editall', 'uses' => 'BloodbankController@BloodbankEdit']);
+	
 	Route::get('admin/bloodbank/delete', ['as' => 'bloodbank.deleteall', 'uses' => 'BloodbankController@BloodbankDelete']);
+
+	Route::get('admin/bloodbank/{bloodbank}/delete', ['as' => 'bloodbank.delete', 'uses' => 'BloodbankController@BloodbankDeleteSingle']);
+	
+	Route::get('admin/bloodbank/deleted-data', ['as' => 'bloodbank.deletedata', 'uses' => 'BloodbankController@BloodbankDeletedData']);
+	
+	Route::get('admin/bloodbank/{bloodbank}/restore', ['as' => 'bloodbank.restore', 'uses' => 'BloodbankController@BloodbankRestoreSingle']);
+
+	Route::delete('admin/bloodbank/delete-selected', ['as' => 'bloodbank.selected.delete', 'uses' => 'BloodbankController@bloodbankSelectedDelete']);
+
+	Route::post('admin/bloodbank/restore-selected', ['as' => 'bloodbank.selected.restore', 'uses' => 'BloodbankController@bloodbankSelectedRestore']);
+	
 	Route::resource('admin/bloodbank', 'BloodbankController');
 	
 

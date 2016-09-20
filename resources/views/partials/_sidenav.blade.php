@@ -76,9 +76,11 @@
                                 <li>
                                     <a href="{{ route('bloodbank.editall') }}"><i class="fa fa-pencil-square-o"></i> Edit Blood Bank</a>
                                 </li>
-
                                 <li>
                                     <a href="{{ route('bloodbank.deleteall') }}"><i class="fa fa-remove"></i> Delete Blood Bank</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('bloodbank.deletedata') }}"><i class="fa fa-eye"></i> View Trashed Blood Bank</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

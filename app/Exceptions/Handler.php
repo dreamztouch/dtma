@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -44,6 +45,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        /*if ($exception instanceof ModelNotFoundException)
+        {
+            if ($request->ajax())
+            {
+                return response()->toJson([
+                    'message' => 'Record not found',
+                ], 404);
+            }
+        }*/
+
+        //return parent::render($request, $e);
         return parent::render($request, $exception);
     }
 
@@ -62,5 +74,7 @@ class Handler extends ExceptionHandler
 
         return redirect()->guest('admin/login');
     }
+
+
 
 }

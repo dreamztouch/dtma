@@ -10,6 +10,8 @@ use App\Bloodbank;
 
 use Session;
 
+use Illuminate\Support\Facades\Input;
+
 class BloodbankController extends Controller
 {
 
@@ -90,7 +92,7 @@ class BloodbankController extends Controller
      */
     public function show($id)
     {
-        $bloodbank = Bloodbank::find($id);
+        $bloodbank = Bloodbank::findOrFail($id);
         return view('bloodbank.show')->withBloodbank($bloodbank);
     }
 
@@ -159,7 +161,44 @@ class BloodbankController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Input::get('trash')) {
+            $bloodbank = Bloodbank::find($id);
+            $bloodbank->delete();
+            Session::flash('success', 'Successfully trash Blood Bank information');
+            return redirect()->route('bloodbank.index');
+        }
+
+        elseif(Input::get('delete')) {
+            $bloodbank = Bloodbank::find($id);
+            $bloodbank->forceDelete();
+            Session::flash('success', 'Successfully delete Blood Bank information');
+            return redirect()->route('bloodbank.index');
+        }
+    }
+
+
+    public function bloodbankSelectedDelete(){
+        $data = Input::get('checkItem');
+        $array_length = count($data);
+        
+
+        //check which submit was clicked on
+        if(Input::get('trash')) {
+            for($start = 0; $start < $array_length; $start++){
+                $bloodbank = Bloodbank::find($data[$start]);
+                $bloodbank->delete();
+            }
+            Session::flash('success', 'Successfully trash Blood Bank information');
+            return redirect()->route('bloodbank.index');
+        } 
+        elseif(Input::get('delete')) {
+            for($start = 0; $start < $array_length; $start++){
+                $bloodbank = Bloodbank::find($data[$start]);
+                $bloodbank->forceDelete();
+            }
+            Session::flash('success', 'Successfully delete Blood Bank information');
+            return redirect()->route('bloodbank.index');
+        }
     }
 
     public function BloodbankEdit(){
@@ -170,5 +209,38 @@ class BloodbankController extends Controller
     public function BloodbankDelete(){
         $bloodbanks = Bloodbank::all();
         return view('bloodbank.deleteall')->withBloodbanks($bloodbanks);
+    }
+
+    public function BloodbankDeleteSingle($id){
+        $bloodbank = Bloodbank::find($id);;
+        return view('bloodbank.delete')->withBloodbank($bloodbank);
+    }
+
+    public function BloodbankDeletedData(){
+        $bloodbanks = Bloodbank::onlyTrashed()->get();
+        return view('bloodbank.deleteddata')->withBloodbanks($bloodbanks);
+    }
+
+    public function BloodbankRestoreSingle($id){
+        Bloodbank::withTrashed()
+        ->where('id', $id)
+        ->restore();
+        $bloodbank = Bloodbank::find($id);
+        Session::flash('success', 'This Data Successfully Restored');
+        return view('bloodbank.restore')->withBloodbank($bloodbank);
+    }
+
+    public function bloodbankSelectedRestore(){
+        $data = Input::get('checkItem');
+        $array_length = count($data);
+
+        for($start = 0; $start < $array_length; $start++){
+            Bloodbank::withTrashed()
+            ->where('id', $data[$start])
+            ->restore();
+        }
+
+        Session::flash('success', 'Successfully restored Blood Bank information');
+        return redirect()->route('bloodbank.index');
     }
 }
