@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use Session;
+
+use Illuminate\Support\Facades\Input;
+
 class DoctorController extends Controller
 {
     /**
@@ -25,7 +29,7 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        //
+        return view('doctor.create');
     }
 
     /**
@@ -36,7 +40,50 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate Data
+        $this->validate($request, [
+            'doctor_name' => [
+                'required',
+                'max: 255',
+                'regex: /^[a-zA-Z . ()\-]+$/'
+            ],
+            'doctor_qualification' => [
+                'required'
+            ],
+            'doctor_designation' => [
+                'required'
+            ]       
+        ]);
+
+        echo $request->doctor_name."<br>";
+        echo $request->doctor_qualification."<br>";
+        echo $request->doctor_designation."<br>";
+        echo $request->doctor_expertise."<br>";
+        echo $request->doctor_chamber."<br>";
+        echo $request->day_from."-".$request->day_to."<br>";
+        echo $request->available_time."<br>";
+        echo $request->doctor_contact."<br>";
+        echo $request->doctor_area."<br>";
+        echo $request->doctor_district."<br>";
+        echo $request->visiting_hospital."<br>";
+
+        echo $request->doctor_organization."<br>";
+        echo $request->doctor_professional_training."<br>";
+        echo $request->doctor_working_experience."<br>";
+        echo $request->doctor_award."<br>";
+        echo $request->doctor_research."<br>";
+        echo $request->doctor_membership."<br>";
+
+
+        $data = Input::get('visiting_hospital_option');
+        $array_length = count($data);
+
+        if($array_length > 0){
+            for($start = 0; $start < $array_length; $start++){
+                echo $data[$start];
+            }
+        }
+
     }
 
     /**

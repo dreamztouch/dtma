@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Bloodbank;
 use App\Ambulance;
 use App\Hospital;
+use App\District;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,13 @@ class AppServiceProvider extends ServiceProvider
         );
 
         view()->share('data', $data);
+
+        $hospitals = Hospital::pluck('hospital_name', 'id');
+        view()->share('hospitals', $hospitals);
+
+        $districts = District::pluck('district_name', 'id');
+        view()->share('districts', $districts);
+
     }
 
     /**

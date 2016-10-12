@@ -10,6 +10,8 @@ use App\Ambulance;
 
 use Session;
 
+use Illuminate\Support\Facades\Input;
+
 class AmbulanceController extends Controller
 {
 
@@ -141,7 +143,43 @@ class AmbulanceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Input::get('trash')) {
+            $ambulance = Ambulance::find($id);
+            $ambulance->delete();
+            Session::flash('success', 'Successfully trash Ambulance information');
+            return redirect()->route('ambulance.index');
+        }
+
+        elseif(Input::get('delete')) {
+            $ambulance = Ambulance::find($id);
+            $ambulance->forceDelete();
+            Session::flash('success', 'Successfully delete Ambulance information');
+            return redirect()->route('ambulance.index');
+        }
+    }
+
+    public function ambulanceSelectedDelete(){
+        $data = Input::get('checkItem');
+        $array_length = count($data);
+        
+
+        //check which submit was clicked on
+        if(Input::get('trash')) {
+            for($start = 0; $start < $array_length; $start++){
+                $ambulance = Ambulance::find($data[$start]);
+                $ambulance->delete();
+            }
+            Session::flash('success', 'Successfully trash Blood Bank information');
+            return redirect()->route('ambulance.index');
+        } 
+        elseif(Input::get('delete')) {
+            for($start = 0; $start < $array_length; $start++){
+                $ambulance = Ambulance::find($data[$start]);
+                $ambulance->forceDelete();
+            }
+            Session::flash('success', 'Successfully delete Blood Bank information');
+            return redirect()->route('ambulance.index');
+        }
     }
 
     public function AmbulanceEdit(){
@@ -152,5 +190,38 @@ class AmbulanceController extends Controller
     public function AmbulanceDelete(){
         $ambulances = Ambulance::all();
         return view('ambulance.deleteall')->withAmbulances($ambulances);
+    }
+
+    public function AmbulanceDeleteSingle($id){
+        $ambulance = Ambulance::find($id);;
+        return view('ambulance.delete')->withAmbulance($ambulance);
+    }
+
+    public function AmbulanceDeletedData(){
+        $ambulances = Ambulance::onlyTrashed()->get();
+        return view('ambulance.deleteddata')->withAmbulances($ambulances);
+    }
+
+    public function AmbulanceRestoreSingle($id){
+        Ambulance::withTrashed()
+        ->where('id', $id)
+        ->restore();
+        $ambulance = Ambulance::find($id);
+        Session::flash('success', 'This Data Successfully Restored');
+        return view('ambulance.restore')->withAmbulance($ambulance);
+    }
+
+    public function ambulanceSelectedRestore(){
+        $data = Input::get('checkItem');
+        $array_length = count($data);
+
+        for($start = 0; $start < $array_length; $start++){
+            Ambulance::withTrashed()
+            ->where('id', $data[$start])
+            ->restore();
+        }
+
+        Session::flash('success', 'Successfully restored Blood Bank information');
+        return redirect()->route('ambulance.index');
     }
 }

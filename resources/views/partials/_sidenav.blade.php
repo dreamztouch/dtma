@@ -20,7 +20,7 @@
                             <a href="#"><i class="fa fa-user-md"></i> Doctors<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="add_doctor.html"><i class="fa fa-plus"></i> Add Doctor</a>
+                                    <a href="{{ route('doctor.create') }}"><i class="fa fa-plus"></i> Add Doctor</a>
                                 </li>
                                 <li>
                                     <a href="edit_doctor.html"><i class="fa fa-pencil-square-o"></i> Edit Doctor</a>
@@ -46,6 +46,9 @@
                                 <li>
                                     <a href="{{ route('hospital.deleteall') }}"><i class="fa fa-remove"></i> Delete Hospital</a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('hospital.deletedata') }}"><i class="fa fa-eye"></i> View Trashed Hospitals</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -62,6 +65,10 @@
 
                                 <li>
                                     <a href="{{ route('ambulance.deleteall') }}"><i class="fa fa-remove"></i> Delete Ambulance</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ route('ambulance.deletedata') }}"><i class="fa fa-eye"></i> View Trashed Ambulance</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

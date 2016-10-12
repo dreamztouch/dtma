@@ -123,7 +123,19 @@ return [
         ],
         'hos_location'   => [
             'required' => 'Hospital location is required',
-            'max'      => 'Hospital location may not be greater than :max characters'
+            'max'      => 'Hospital location may not be greater than :max characters',
+            'unique'   => 'This hospital location has already been taken'
+        ],
+        'doctor_name'    => [
+            'required' => 'Doctor name is required',
+            'max'      => 'Doctor name may not be greater than :max characters',
+            'regex'   => 'Invalid Doctor name'
+        ],
+        'doctor_qualification' => [
+            'required' => 'Doctor qualification is required'
+        ],
+        'doctor_designation' => [
+            'required' => 'Doctor Designation is required'
         ]
     ],
 

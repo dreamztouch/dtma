@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'DTMA- Delete Blood Bank')
+@section('title', 'DTMA- Delete Ambulance')
 
 
 @section('stylesheets')
@@ -29,7 +29,7 @@
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="page-header">RESTORE Blood Bank Information</h2>
+                    <h2 class="page-header">RESTORE Ambulance Information</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -38,42 +38,36 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Blood Bank Information
+                            Ambulance Information
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
-                                {!! Form::open(['route' => 'bloodbank.selected.restore']) !!} 
+                                {!! Form::open(['route' => 'ambulance.selected.restore']) !!} 
                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
                                             <td>Select</td>
                                             <th>#ID</th>
                                             <th>Orgainzation Name</th>
-                                            <th>Location</th>
                                             <th>Area</th>
                                             <th>City</th>
                                             <th>Contact Number</th>
-                                            <th>Email</th>
-                                            <th>Website</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($bloodbanks as $bloodbank)
+                                        @foreach ($ambulances as $ambulance)
                                             <tr class="odd gradeX">
                                                 <td>
-                                                    {{Form::checkbox('checkItem[]', $bloodbank->id, null)}}
+                                                    {{Form::checkbox('checkItem[]', $ambulance->id, null)}}
                                                 </td>
-                                                <th>{{ $bloodbank->id }}</th>
-                                                <td>{{ $bloodbank->bloodbank_name }}</td>
-                                                <td>{{ $bloodbank->location }}</td>
-                                                <td>{{ $bloodbank->area }}</td>
-                                                <td>{{ $bloodbank->city }}</td>
-                                                <td>{{ $bloodbank->contact }}</td>
-                                                <td>{{ $bloodbank->bloodbank_email }}</td>
-                                                <td>{{ $bloodbank->bloodbank_web }}</td>
-                                                <td><a href="{{ route('bloodbank.restore', $bloodbank->id) }}">Restore</a></td>
+                                                <th>{{ $ambulance->id }}</th>
+                                                <td>{{ $ambulance->organization_name }}</td>
+                                                <td>{{ $ambulance->area }}</td>
+                                                <td>{{ $ambulance->city }}</td>
+                                                <td>{{ $ambulance->contact }}</td>
+                                                <td><a href="{{ route('ambulance.restore', $ambulance->id) }}">Restore</a></td>
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -10,6 +10,8 @@ use App\Hospital;
 
 use Session;
 
+use Illuminate\Support\Facades\Input;
+
 class HospitalController extends Controller
 {
     /**
@@ -48,11 +50,11 @@ class HospitalController extends Controller
                 'max: 255',
                 'regex: /^[a-zA-Z .\-]+$/'
             ],
-            'hos_location' => 'required | max:255',
+            'hos_location' => 'required | max:255 | unique:hospitals,hos_location',
             'area' => [
                 'required',
                 'max:255',
-                'regex: /^[a-zA-Z .\-]+$/'
+                'regex: /^[a-zA-Z .\-]+$/',
             ]      
         ]);
 
@@ -143,7 +145,19 @@ class HospitalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Input::get('trash')) {
+            $hospital = Hospital::find($id);
+            $hospital->delete();
+            Session::flash('success', 'Successfully trash Hospital information');
+            return redirect()->route('hospital.index');
+        }
+
+        elseif(Input::get('delete')) {
+            $hospital = Hospital::find($id);
+            $hospital->forceDelete();
+            Session::flash('success', 'Successfully delete Hospital information');
+            return redirect()->route('hospital.index');
+        }
     }
 
     public function HospitalEdit(){
@@ -154,5 +168,62 @@ class HospitalController extends Controller
     public function HospitalDelete(){
         $hospitals = Hospital::all();
         return view('hospital.deleteall')->withHospitals($hospitals);
+    }
+
+    public function HospitalDeleteSingle($id){
+        $hospital = Hospital::find($id);;
+        return view('hospital.delete')->withHospital($hospital);
+    }
+
+    public function HospitalDeletedData(){
+        $hospitals = Hospital::onlyTrashed()->get();
+        return view('hospital.deleteddata')->withHospitals($hospitals);
+    }
+
+    public function HospitalRestoreSingle($id){
+        Hospital::withTrashed()
+        ->where('id', $id)
+        ->restore();
+        $hospital = Hospital::find($id);
+        Session::flash('success', 'This Data Successfully Restored');
+        return view('hospital.restore')->withHospital($hospital);
+    }
+
+    public function hospitalSelectedDelete(){
+        $data = Input::get('checkItem');
+        $array_length = count($data);
+        
+
+        //check which submit was clicked on
+        if(Input::get('trash')) {
+            for($start = 0; $start < $array_length; $start++){
+                $hospital = Hospital::find($data[$start]);
+                $hospital->delete();
+            }
+            Session::flash('success', 'Successfully trash Hospital information');
+            return redirect()->route('hospital.index');
+        } 
+        elseif(Input::get('delete')) {
+            for($start = 0; $start < $array_length; $start++){
+                $hospital = Hospital::find($data[$start]);
+                $hospital->forceDelete();
+            }
+            Session::flash('success', 'Successfully delete Hospital information');
+            return redirect()->route('hospital.index');
+        }
+    }
+
+    public function hospitalSelectedRestore(){
+        $data = Input::get('checkItem');
+        $array_length = count($data);
+
+        for($start = 0; $start < $array_length; $start++){
+            Hospital::withTrashed()
+            ->where('id', $data[$start])
+            ->restore();
+        }
+
+        Session::flash('success', 'Successfully restored Hospital information');
+        return redirect()->route('hospital.index');
     }
 }
